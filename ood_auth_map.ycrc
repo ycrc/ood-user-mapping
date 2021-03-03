@@ -1,0 +1,120 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
+require 'ood_auth_map'
+
+class Regex < OodAuthMap
+  # Default regular expression to use when parsing authenticated username
+  DEFAULT_REGEX = "^(.+)$"
+
+  # Body of option parser
+  define_body do |parser|
+    parser.separator ""
+    parser.separator "Used to parse for a mapped authenticated user from a string using a regular expression."
+
+    parser.separator ""
+    parser.separator "General options:"
+
+    options[:regex] = DEFAULT_REGEX
+    parser.on("-r", "--regex=REGEX", "# Regular expression used to capture the system-level username", "# Default: #{DEFAULT_REGEX}") do |regex|
+      options[:regex] = regex
+    end
+
+    options[:mapfile] = ""
+    parser.on("-f", "--mapfile=/path/to/map_file", "# specify the map_file for user mapping", " Default: None") do |mapfile|
+      options[:mapfile] = mapfile
+    end
+
+  end
+
+  # Footer of option parser
+  define_footer do |parser|
+    parser.separator ""
+    parser.separator <<-EOF.gsub(/^ {6}/, "")
+      Examples:
+      1.  If the authenticated username completely matches the system-level
+          username use the default regular expression:
+
+              #{File.basename($0)} alice
+
+          this will return `alice`.
+
+          For more complicated strings, a regular expression needs to be
+          supplied as an option:
+
+              #{File.basename($0)} --regex='^(\\w+)@yale.edu$' alice@yale.edu
+
+          where the first captured match is returned as the system-level username.
+
+          If no match is found in the string, then a blank line is returned:
+
+              #{File.basename($0)} --regex='^(\\w+)@yale.edu$' alice@harvard.edu
+
+          this will return a blank line, meaning no match was found.
+
+      2.  To scan a mapfile using an authenticated username:
+
+              #{File.basename($0)} --file=/path/to/mapfile username
+
+          Each entry of the mapfile is given in the following format:
+   
+              "authenticated_user" cluster_user
+
+          It will return cluster_user for the first matched authenticated_user, 
+          and return an empty string if no matches are found.
+
+    EOF
+    parser.separator ""
+  end
+
+  # The code does the following:
+  #  1. If a customized mapfile is provided through '-f' or '--file=', then scan username in the mapfile. 
+  #     1.1 If found, print the cluster_user of the first match in the mapfile and return true. 
+  #     1.2 Else, print a blank line and return false.
+  #  2. Else if the mapfile /etc/ood/config/map_file exists, then scan username in the mapfile. 
+  #     2.1 If found, print the cluster_user of the first match in the mapfile and return true. 
+  #     2.2 Else parse username through regex. If succeed, print the parsed name and return true.
+  #     2.3 Else print a blank line and return false.
+  #  3. Else parse username throuth regex. If succeed, print the parsed name and return true. 
+  #  4. Else print a blank line and return false.
+
+  default_mapfile = '/etc/ood/config/map_file'
+
+  define_run do |auth_user|
+
+    # If a user defined mapfile exists and it is not the default mapfile, parse through the file only
+    if File.file?(options[:mapfile]) && options[:mapfile] != default_mapfile
+      if sys_user =  Helpers.parse_mapfile(options[:mapfile], auth_user)
+        puts sys_user
+      else
+        puts ""
+        exit(false)
+      end
+
+    # If the default mapfile exists, parse through the file first. If not found, then parse through regex
+    elsif File.file?(default_mapfile)
+      if sys_user =  Helpers.parse_mapfile(default_mapfile, auth_user)
+        puts sys_user
+      elsif sys_user = Helpers.parse_string(auth_user, /#{options[:regex]}/)
+        puts sys_user
+      else
+        puts ""
+        exit(false)
+      end
+ 
+    # no mapfile, parse through regex
+    elsif sys_user = Helpers.parse_string(auth_user, /#{options[:regex]}/)
+      puts sys_user
+
+    # all other cases, return false
+    else
+      puts ""
+      exit(false)
+    end
+
+  end
+
+end
+
+# Start the workflow of the Regex CLI
+Regex.run
