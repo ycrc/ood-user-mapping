@@ -3,7 +3,7 @@ This script allows a system admin to log in to the OOD portal with their own acc
 
     "amdin_account" cluster_user_account
 
-If your site are using the default regex user mapping script from OOD, you can simply modify `mod_auth_user.regex` with the following changes. Then `mod_auth_user.regex` will try to map a user using `/etc/ood/config/map_file` first.
+If your site is using the default regex user mapping script from OOD, you can simply modify `mod_auth_user.regex` with the following changes. Then `mod_auth_user.regex` will try to map a user using `/etc/ood/config/map_file` first.
 
     diff /opt/ood/ood_auth_map/bin/ood_auth_map.regex.orig
     54,56c54
