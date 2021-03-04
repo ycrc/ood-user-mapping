@@ -19,19 +19,19 @@ class YcrcMap < OodAuthMap
     options[:automap] = ""
     parser.on("-a", "--automap=STRING", "# automatic user mapping; a '%' in STRING will be replaced by the authenticated username", "# Default: None") do |automap|
       options[:automap] = automap
-      parser_selector = "STRING"
+      $parser_selector = "AUTOMAP"
     end
 
     options[:mapfile] = ""
     parser.on("-f", "--mapfile=/path/to/map_file", "# specify the map_file for user mapping", " Default: None") do |mapfile|
       options[:mapfile] = mapfile
-      parser_selector = "MAPFILE"
+      $parser_selector = "MAPFILE"
     end
 
     options[:regex] = DEFAULT_REGEX
     parser.on("-r", "--regex=REGEX", "# Regular expression used to capture the system-level username", "# Default: #{DEFAULT_REGEX}") do |regex|
       options[:regex] = regex
-      parser_selector = "REGEX"
+      $parser_selector = "REGEX"
     end
   end
 
