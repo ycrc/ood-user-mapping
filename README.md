@@ -1,3 +1,9 @@
+## Virtual Host Configuration
+Our course-based virtual hosts are configrued in `/opt/rh/httpd24/root/etc/httpd/conf.d/macro.conf`. The virtual host configuration is adapted from the OOD portal configuration and is simplified by using Apache `mod_macro`. To add a new virtual host OOD portal for the same OOD backend, add two lines before `UndefMacro VHost80`:
+
+    Use VHost80 coursename.ycrc.yale.edu
+    Use VHost coursename coursename.ycrc.yale.edu
+
 ## Impersonation
 This script allows a system admin to log in to the OOD portal with their own account, but becomes another user on the cluster. This comes handy when the system admin needs to "run as" the other user to help troubleshooting user issues. To impersonate a local cluster user, add one entry to /etc/ood/config/map-file with the following format:
 
