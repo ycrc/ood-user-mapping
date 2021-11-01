@@ -1,5 +1,5 @@
 ## Introduction
-At the Yale Center for Research Computing, we separate **course 
+At the Yale Center for Research Computing (YCRC), we separate **course 
 accounts** from regular **research accounts**. 
 This allows us to separate quotas for the two types of accounts and 
 makes it easy to creat and delete course accounts each semester. Users 
@@ -57,20 +57,20 @@ Our customized OOD user mapping scripts are based on the OOD user mapping script
 ```{bash}
 git clone https://github.com/ycrc/ood-user-mapping 
 ``` 
-1. copy `ycrc_auth_map` and rename it to something you like (we use `customized_auth_map` as an example)
+2. copy `ycrc_auth_map` and rename it to something you like (we use `customized_auth_map` as an example)
 ```{bash}
 cd ood-user-mapping
 sudo cp -R ycrc_auth_map /opt/ood/customized_auth_map
 ```
-1. edit `/etc/ood/config/ood-portal.yml` and add the following line. You could also choose `ood_auth_map.mapfile` or `ood_auth_map.automap` depending on what you need to do. 
+3. edit `/etc/ood/config/ood-portal.yml` and add the following line. You could also choose `ood_auth_map.mapfile` or `ood_auth_map.automap` depending on what you need to do. 
 ```{bash
 user_map_cmd: '/opt/ood/customized_auth_map/bin/ood_auth_map.regex'
 ```
-1. apply the patch to the portal generator
+4. apply the patch to the portal generator
 ```{bash}
 patch -u /opt/ood/ood-portal-generator/templates/ood-portal.conf.erb -i ood-portal.conf.erb.patch
 ```
-1. build and install the new Apache configuration file with: 
+5. build and install the new Apache configuration file with: 
 ```{bash}
 sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 ```
@@ -112,4 +112,5 @@ In our case, those files are owned by root and is only writable by root.
 
 ## References
 [OOD: setup user mapping](https://osc.github.io/ood-documentation/latest/authentication/overview/map-user.html)
+
 [PEARC'21 Paper: Using Single Sign-On Authentication with Multiple Open OnDemand Accounts](https://camps.aptaracorp.com/ACM_PMS/PMS/ACM/PEARC21/17/24105510-ba1d-11eb-8d84-166a08e17233/OUT/pearc21-17.html)
