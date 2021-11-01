@@ -80,7 +80,7 @@ sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 
 ## How to Use the User Mapping Scripts
 
-You can test the user mapping scripts from the command line. To see how to use them, launch scripts with `--help`. For example: 
+You can test the user mapping scripts from the command line. To see how to use one of the scripts, launch the script with `--help`. For example: 
 ```{bash}
 $ ./ycrc_auth_map/bin/ood_auth_map.automap --help
 Usage: ood_auth_map.automap [options] <authenticated_user>
@@ -108,7 +108,7 @@ Examples:
 ## Name-based Virtual Hosts 
 
 We need some preparational work before configuring a new name-based virtual host for OOD. First, we need to 
-obtain a Canonical Name (CNAME) Record for the OOD server. Second, we need update the 
+obtain a Canonical Name (CNAME) Record for the OOD server. Second, we need to update the 
 site SSL certificate to accept the new CNAME.  
 
 To configure a new OOD virtual host, one way is to copy `/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf` and then replace 
