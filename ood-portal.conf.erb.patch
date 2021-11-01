@@ -1,0 +1,12 @@
+--- ood-portal.conf.erb.orig	2021-09-07 10:57:26.987089296 -0400
++++ ood-portal.conf.erb	2021-09-02 15:13:29.570470300 -0400
+@@ -55,6 +55,9 @@
+ #     #=> <%= @ssl ? "https" : "http" %>://<%= @proxy_server || "localhost" %>:<%= @port %>
+ #
+ <VirtualHost *:80>
++  <%- if @servername -%>
++  ServerName <%= @servername %>
++  <%- end -%>
+   RewriteEngine On
+   RewriteRule ^(.*) <%= @ssl ? "https" : "http" %>://<%= @proxy_server || "%{SERVER_NAME}" %>:<%= @port %>$1 [R=301,NE,L]
+ </VirtualHost>
