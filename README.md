@@ -138,7 +138,8 @@ To impersonate a local cluster user, add one entry to `/etc/ood/config/map_file`
 
 Allowing a system admin to "run as" another user is useful when the system admin needs to help the user troubleshoot problems on OOD.
 However, it is also very dangerous if the permissions of related files are not set properly, 
-including `admin.rb`, `map_file`, and any other mapping files if exist (for example, mapping files used by `ood_auth_map.mapfile`). 
+including the code base of `customized_auth_map`, `map_file`, and any other mapping files if exist 
+(for example, mapping files used by `ood_auth_map.mapfile`). 
 All these files are world readable, however, they must be owned by a privileged user and are **ONLY** writable by that user. 
 In our case, those files are owned by root and is only writable by root.
 
