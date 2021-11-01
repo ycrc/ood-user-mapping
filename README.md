@@ -112,3 +112,4 @@ In our case, those files are owned by root and is only writable by root.
 
 ## References
 [OOD: setup user mapping](https://osc.github.io/ood-documentation/latest/authentication/overview/map-user.html)
+[PEARC'21 Paper: Using Single Sign-On Authentication with Multiple Open OnDemand Accounts](https://camps.aptaracorp.com/ACM_PMS/PMS/ACM/PEARC21/17/24105510-ba1d-11eb-8d84-166a08e17233/OUT/pearc21-17.html)
