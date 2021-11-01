@@ -23,7 +23,7 @@ a user with multiple accounts can easily log in with one NetID, but work under d
 
 Our user mapping script also supports **impersonation**, a handy feature for
 system admins to log into OOD as any users. We have used impersonation frequently
-to help our user debugging their OOD issues. 
+to help our user troubleshoot their issues on OOD. 
 
 Our customized OOD user mapping scripts are based on the OOD user mapping scripts from OOD version 1.8 and below. Since OOD 2.0, OOD has adopted `user_map_match` as the default user mapping command. However, we can still use the scripts described in this document by assigning `user_map_cmd` to one of the scripts in `ood_portal.yml`.
 
