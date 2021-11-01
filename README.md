@@ -25,7 +25,10 @@ Our user mapping script also supports **impersonation**, a handy feature for
 system admins to log into OOD as any users. We have used impersonation frequently
 to help our user troubleshoot their issues on OOD. 
 
-Our customized OOD user mapping scripts are based on the OOD user mapping scripts from OOD version 1.8 and below. Since OOD 2.0, OOD has adopted `user_map_match` as the default user mapping command. However, we can still use the scripts described in this document by assigning `user_map_cmd` to one of the scripts in `ood_portal.yml`.
+Our customized OOD user mapping scripts are based on the OOD user mapping scripts 
+from OOD version 1.8 and below. Since OOD 2.0, OOD has adopted `user_map_match` 
+as the default user mapping command. However, we can still use the scripts described 
+in this document by adding `user_map_cmd` in `ood_portal.yml`.
 
 ## What's Included
 <pre>
@@ -75,6 +78,33 @@ patch -u /opt/ood/ood-portal-generator/templates/ood-portal.conf.erb -i ood-port
 sudo /opt/ood/ood-portal-generator/sbin/update_ood_portal
 ```
 
+## How to Use the User Mapping Scripts
+
+You can test the user mapping scripts from the command line. To see how to use them, launch scripts with `--help`. For example: 
+```{bash}
+$ ./ycrc_auth_map/bin/ood_auth_map.automap --help
+Usage: ood_auth_map.automap [options] <authenticated_user>
+
+Used to parse for a mapped authenticated user from a template.
+
+General options:
+    -a, --automap=TEMPLATE           # Template used to generate the authenticated user
+                                     # TEMPLATE must contains at least one '%' sign
+                                     # The first '%' in TEMPLATE will be replaced by the authenticated username
+                                     # Default: None
+
+Common options:
+    -h, --help                       # Show this help message
+    -v, --version                    # Show version
+
+Examples:
+    Map the authenticated username to the system-level username 
+    by replacing the first '%' in TEMPLATE. 
+
+        ood_auth_map.automap --automap=foo_%_bar alice
+
+    this will return `foo_alice_bar`. 
+```
 ## Name-based Virtual Hosts 
 
 We need some preparational work before configuring a new name-based virtual host for OOD. First, we need to 
@@ -94,7 +124,9 @@ Adding a new virtual host is simple using `mod_macro`. Only two lines need be ad
     Use VHost80 coursename.your_domain
     Use VHost coursename coursename.your_domain
 </pre>
+
 ## Impersonation
+
 The mapping file used by system admins to impersonate a user is defined in `/opt/ood/customized_auth_map/lib/ood_auth_map/admin.rb`. The default mapping file is `/etc/ood/config/map_file`. 
 
 To impersonate a local cluster user, add one entry to `/etc/ood/config/map_file` following format as below:
@@ -110,7 +142,12 @@ including `admin.rb`, `map_file`, and any other mapping files if exist (for exam
 All these files are world readable, however, they must be owned by a privileged user and are **ONLY** writable by that user. 
 In our case, those files are owned by root and is only writable by root.
 
+## Contact Us 
+
+Please provide your feedback and report bugs to [Ping Luo](mailto:ping.luo@yale.edu)
+
 ## References
+
 [OOD: setup user mapping](https://osc.github.io/ood-documentation/latest/authentication/overview/map-user.html)
 
 [PEARC'21 Paper: Using Single Sign-On Authentication with Multiple Open OnDemand Accounts](https://camps.aptaracorp.com/ACM_PMS/PMS/ACM/PEARC21/17/24105510-ba1d-11eb-8d84-166a08e17233/OUT/pearc21-17.html)
