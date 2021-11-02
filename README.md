@@ -12,13 +12,14 @@ research separated from those of their coursework on the cluster.
 The YCRC OOD servers are configured with CAS for authentication. Users
 log in to a CAS-enabled OOD using their NetID, which is unique to each
 user. When a user has multiple accounts on the cluster, they 
-would like to be able to log in to OOD and work under different accounts. 
-However, the default virtual host deployed by OOD can only allow one such account,
-and we use the default virtual host for research accounts. 
-For course accounts, we create  a course-specific virtual host for each course
-on the cluster and map the login NetID to the appropriate course account. 
+would like to be able to log in to OOD and work under the different accounts. 
+However, the default setting of OOD can only allow one such account. 
+To reseove the issue, we dedicate the default virtual host deployed by OOD 
+for research accounts only and create an individual virtual host for 
+each course that is using OOD on the cluster. We also map the login NetID 
+to the appropriate course account in each course-specific virtual host. 
 The mapping operation is done using our customized user mapping scripts. 
-The different virtual hosts are essentially different frontends and
+The different virtual hosts are essentially different frontends of OOD and
 they all share the same OOD backend. Through multiple virtual hosts and
 our customized user mapping scripts, a user with multiple accounts can easily 
 log in with one NetID, but work under different accounts on OOD.
