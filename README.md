@@ -8,24 +8,24 @@ also find it is extremely useful to have the working spaces of their
 research separated from those of their coursework on the cluster.
 
 The YCRC OOD servers are configured with CAS for authentication. Users
-log in to our CAS-enabled OODs using their NetID, which is unique to each
-user. However, when a user has multiple accounts on the cluster, they 
-would like to be able to log in and work under different accounts. So 
-in addition to the default virtual host deployed by OOD, which will
-be used by the regular research accounts, for each course
-using the cluster, we also create a course-specific virtual host
-and map the login NetID to the appropriate user account. The mapping operation
-is done using our customized user mapping scripts. 
-The different virtual hosts are essentially different frontends of the OOD server.
-However, they all share the same OOD backend. Through multiple virtual hosts and
-our customized user mapping scripts, 
-a user with multiple accounts can easily log in with one NetID, but work under different accounts on OOD.
+log in to a CAS-enabled OOD using their NetID, which is unique to each
+user. When a user has multiple accounts on the cluster, they 
+would like to be able to log in to OOD and work under different accounts. 
+However, the default virtual host deployed by OOD can only allow one such account,
+and we use the default virtual host for research accounts. 
+For course accounts, we create  a course-specific virtual host for each course
+on the cluster and map the login NetID to the appropriate course account. 
+The mapping operation is done using our customized user mapping scripts. 
+The different virtual hosts are essentially different frontends and
+they all share the same OOD backend. Through multiple virtual hosts and
+our customized user mapping scripts, a user with multiple accounts can easily 
+log in with one NetID, but work under different accounts on OOD.
 
-Our user mapping script also supports **impersonation**, a handy feature for
-system admins to log into OOD as any users. We have used impersonation frequently
-to help our user troubleshoot their issues on OOD. 
+The YCRC user mapping script also supports **impersonation**, a handy feature to allow
+a system admin to log in to OOD and become another user. Impersonation is useful when
+helping users troubleshoot their issues on OOD. 
 
-Our customized OOD user mapping scripts are based on the OOD user mapping scripts 
+The YCRC customized OOD user mapping scripts are based on the OOD user mapping scripts 
 from OOD version 1.8 and below. Since OOD 2.0, OOD has adopted `user_map_match` 
 as the default user mapping command. However, we can still use the scripts described 
 in this document by adding `user_map_cmd` in `ood_portal.yml`.
@@ -36,7 +36,7 @@ in this document by adding `user_map_cmd` in `ood_portal.yml`.
 ├── macro.conf (<i>a sample configuration file for name-based virutal hosts</i>)
 ├── ood-portal.conf.erb.patch (<i>a patch to make OOD work properly with multiple virtual hosts </i>)
 ├── README.md (<i>this file</i>)
-└── ycrc_auth_map (<i>source tree of our customized user mapping scripts</i>)
+└── ycrc_auth_map (<i>source tree of the YCRC customized user mapping scripts</i>)
     ├── bin
     │   ├── ood_auth_map.automap
     │   ├── ood_auth_map.mapfile
