@@ -2,7 +2,7 @@
 At the Yale Center for Research Computing (YCRC), we separate **course 
 accounts** from regular **research accounts**. 
 This allows us to separate quotas for the two types of accounts and 
-makes it easy to creat and delete course accounts each semester. Users 
+makes it easy to create and delete course accounts each semester. Users 
 with multiple accounts (ex: a research account plus a course account) 
 also find it is extremely useful to have the working spaces of their 
 research separated from those of their coursework on the cluster.
@@ -139,16 +139,16 @@ To impersonate a local cluster user, add one entry to `/etc/ood/config/map_file`
 
 ## Security
 
-File based mapping is very flexible. However, it is also dangerous if the permissions of 
-the related files are not set properly. The files include
+File based mapping is very flexible. It could also be dangerous if the permissions of 
+the related files are not set properly. As such, we must take necessary precaution to protect
 the code base of `customized_auth_map`, the mapping file used for impersonation, and any other mapping files 
-used by `ood_auth_map.mapfile` if it is used to set up `OOD_USER_MAP_CMD`. 
+used by `ood_auth_map.mapfile` if it is used as the user mapping command.
 All these files are world readable, however, they must be owned by a privileged user and are **ONLY** writable by that user. 
 In our case, those files are owned by root and are only writable by root.
 
 ## Contact Us 
 
-Please provide your feedback and report bugs to [Ping Luo](mailto:ping.luo@yale.edu)
+Please provide your feedback and report bugs to [ping.luo@yale.edu](mailto:ping.luo@yale.edu)
 
 ## References
 
