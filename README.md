@@ -1,3 +1,5 @@
+[![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 ## Introduction
 At the Yale Center for Research Computing (YCRC), we separate **course 
 accounts** from regular **research accounts**. 
