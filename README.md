@@ -117,7 +117,7 @@ any occurrence of the old FQDN with the new CNAME. Also point `OOD_USER_MAP_CMD`
 If more than one additional virtual host needs to be created and all of them follow a specific pattern, 
 then use Apache `mod_macro` will simplify the configuration tremendously. 
 We have provided a sample `mod_macro` configuration file `macro.conf`, which is adapted from
-the default OOD portal configuration file. Its full location is `/opt/rh/httpd24/root/etc/httpd/conf.d/macro.conf`. 
+the default OOD portal configuration file. It is located at `/opt/rh/httpd24/root/etc/httpd/conf.d/macro.conf`. 
 
 Adding a new virtual host is simple using `mod_macro`. Only two lines need be added in `macro.conf` before `UndefMacro VHost80`:
 <pre>
