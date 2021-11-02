@@ -127,21 +127,24 @@ Adding a new virtual host is simple using `mod_macro`. Only two lines need be ad
 
 ## Impersonation
 
-The mapping file used by system admins to impersonate a user is defined in `/opt/ood/customized_auth_map/lib/ood_auth_map/admin.rb`. The default mapping file is `/etc/ood/config/map_file`. 
+Allowing a system admin to "run as" another user is useful when the system admin needs to help the user troubleshoot problems on OOD.
+Our scripts allow impersonation through a mapping file. 
+The mapping file is defined in `/opt/ood/customized_auth_map/lib/ood_auth_map/admin.rb`. 
+The default mapping file is `/etc/ood/config/map_file`. 
 
-To impersonate a local cluster user, add one entry to `/etc/ood/config/map_file` following format as below:
+To impersonate a local cluster user, add one entry to `/etc/ood/config/map_file` following the format as below:
 
     "amdin_login_account" cluster_user_account
 
 
-<b>WARNING</b>
+## Security
 
-Allowing a system admin to "run as" another user is useful when the system admin needs to help the user troubleshoot problems on OOD.
-However, it is also very dangerous if the permissions of related files are not set properly, 
-including the code base of `customized_auth_map`, `map_file`, and any other mapping files if exist 
-(for example, mapping files used by `ood_auth_map.mapfile`). 
+File based mapping is very flexible. However, it is also dangerous if the permissions of 
+the related files are not set properly. The files include
+the code base of `customized_auth_map`, the mapping file used for impersonation, and any other mapping files 
+used by `ood_auth_map.mapfile` if it is used to set up `OOD_USER_MAP_CMD`. 
 All these files are world readable, however, they must be owned by a privileged user and are **ONLY** writable by that user. 
-In our case, those files are owned by root and is only writable by root.
+In our case, those files are owned by root and are only writable by root.
 
 ## Contact Us 
 
