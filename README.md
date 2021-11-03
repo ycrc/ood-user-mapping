@@ -3,8 +3,9 @@
 ## Introduction
 The clusters at the Yale Center for Research Computing (YCRC) are used 
 for both research and teaching. Therefore, we support two types 
-of accounts on out cluster: **research accounts** and **course accounts**. 
-This distinction allows us to provide different procedures and seperate 
+of accounts on out clusters: **research accounts** and **course accounts**. 
+Althouth both are essentially cluster accounts, 
+this distinction allows us to provide different procedures and seperate 
 cluster resources for the two types of accounts.
 
 The YCRC OOD servers are configured with CAS for authentication. Users
