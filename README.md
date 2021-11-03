@@ -1,20 +1,19 @@
 [![GitHub License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ## Introduction
-At the Yale Center for Research Computing (YCRC), we separate **course 
-accounts** from regular **research accounts**. 
-This allows us to separate quotas for the two types of accounts and 
-makes it easy to create and delete course accounts each semester. Users 
-with multiple accounts (ex: a research account plus a course account) 
-also find it is extremely useful to have the working spaces of their 
-research separated from those of their coursework on the cluster.
+The clusters at the Yale Center for Research Computing (YCRC) are used 
+for both research and teaching. Therefore, we support two types 
+of accounts: **research accounts** and **course accounts**. This distinction
+allows us to provide different procedures and seperate 
+cluster resources for the two types of accounts on the clusters.
 
 The YCRC OOD servers are configured with CAS for authentication. Users
 log in to a CAS-enabled OOD using their NetID, which is unique to each
-user. When a user has multiple accounts on the cluster, they 
+user. When a user has multiple accounts on the cluster 
+(ex: a research account + a course account), they 
 would like to be able to log in to OOD and work under the different accounts. 
 However, the default setting of OOD can only allow one such account. 
-To reseove the issue, we dedicate the default virtual host deployed by OOD 
+To resolve the issue, we dedicate the default virtual host deployed by OOD 
 for research accounts only and create an individual virtual host for 
 each course that is using OOD on the cluster. We also map the login NetID 
 to the appropriate course account in each course-specific virtual host. 
@@ -110,17 +109,18 @@ Examples:
 ```
 ## Name-based Virtual Hosts 
 
-We need some preparational work before configuring a new name-based virtual host for OOD. First, we need to 
+We need some preparation before configuring a new name-based virtual host for OOD. First, we need to 
 obtain a Canonical Name (CNAME) Record for the OOD server. Second, we need to update the 
 site SSL certificate to accept the new CNAME.  
 
-To configure a new OOD virtual host, one way is to copy `/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf` and then replace 
+Once the above are done, we can start configuring a new OOD virtual host.
+One way is to make a copy of `/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.conf` and then replace in the copy 
 any occurrence of the old FQDN with the new CNAME. Also point `OOD_USER_MAP_CMD` to the new user mapping script if needed. 
 
 If more than one additional virtual host needs to be created and all of them follow a specific pattern, 
 then use Apache `mod_macro` will simplify the configuration tremendously. 
-We have provided a sample `mod_macro` configuration file `macro.conf`, which is adapted from
-the default OOD portal configuration file. It is located at `/opt/rh/httpd24/root/etc/httpd/conf.d/macro.conf`. 
+A sample `mod_macro` configuration file `macro.conf` is provided, which is adapted from
+the default OOD portal configuration file. It should be stored at `/opt/rh/httpd24/root/etc/httpd/conf.d/macro.conf`. 
 
 Adding a new virtual host is simple using `mod_macro`. Only two lines need be added in `macro.conf` before `UndefMacro VHost80`:
 <pre>
@@ -151,7 +151,7 @@ In our case, those files are owned by root and are only writable by root.
 
 ## Contact Us 
 
-Please provide your feedback and report bugs to [ping.luo@yale.edu](mailto:ping.luo@yale.edu)
+Please provide your feedback and report bugs to [research.computing@yale.edu](mailto:research.computing@yale.edu)
 
 ## References
 
