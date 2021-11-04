@@ -2,7 +2,7 @@
 
 ## Introduction
 The clusters at the Yale Center for Research Computing (YCRC) are used 
-for both research and teaching. Therefore, we support two types 
+for both research and academic courses with a computational compoment. Therefore, we support two types 
 of accounts on out clusters: **research accounts** and **course accounts**. 
 Althouth both are essentially cluster accounts, 
 this distinction allows us to provide different procedures and seperate 
@@ -19,8 +19,7 @@ for research accounts only and create an individual virtual host for
 each course that is using OOD on the cluster. We also map the login NetID 
 to the appropriate course account in each course-specific virtual host. 
 The mapping operation is done using our customized user mapping scripts. 
-The different virtual hosts are essentially different frontends of OOD and
-they all share the same OOD backend. Through multiple virtual hosts and
+Through multiple virtual hosts and
 our customized user mapping scripts, a user with multiple accounts can easily 
 log in with one NetID, but work under different accounts on OOD.
 
