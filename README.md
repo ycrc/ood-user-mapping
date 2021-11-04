@@ -47,7 +47,7 @@ in this document by adding `user_map_cmd` in `ood_portal.yml`.
     ├── Gemfile
     ├── lib
     │   ├── ood_auth_map
-    │   │   ├── admin.rb (<i>the mapfile used by admins to impersonate a user</i>)
+    │   │   ├── admin.rb (<i>define the mapfile used by admins to impersonate a user</i>)
     │   │   ├── helpers.rb
     │   │   └── version.rb
     │   └── ood_auth_map.rb
@@ -118,7 +118,7 @@ One way is to make a copy of `/opt/rh/httpd24/root/etc/httpd/conf.d/ood-portal.c
 any occurrence of the old FQDN with the new CNAME. Also point `OOD_USER_MAP_CMD` to the new user mapping script if needed. 
 
 If more than one additional virtual host needs to be created and all of them follow a specific pattern, 
-then use Apache `mod_macro` will simplify the configuration tremendously. 
+then using Apache `mod_macro` will simplify the configuration tremendously. 
 A sample `mod_macro` configuration file `macro.conf` is provided, which is adapted from
 the default OOD portal configuration file. It should be stored at `/opt/rh/httpd24/root/etc/httpd/conf.d/macro.conf`. 
 
